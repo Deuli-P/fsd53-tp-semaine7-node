@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "/src/context/AuthContext";
 
 const AuthMiddleware = () => {
-    const { sessionToken, user } = useAuth();
+    const { sessionToken } = useAuth();
     
     if (!sessionToken) {
         return <Navigate to="/login" />;
@@ -10,7 +10,7 @@ const AuthMiddleware = () => {
 
     const checkIfConnected = async() => {
         try{
-            // const response = await fetch({`${import.meta.env.VITE_API_URL}/users/${user.id}`}, {
+            // const response = await fetch({`${import.meta.env.VITE_API_URL}/user/${user.id}`}, {
             //     method: 'GET',
             //     headers: {
             //         'Content-Type': 'application/json',

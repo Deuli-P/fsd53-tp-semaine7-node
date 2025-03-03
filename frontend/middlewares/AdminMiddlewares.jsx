@@ -2,11 +2,11 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "/src/context/AuthContext";
 
 const AdminMiddleware = () => {
-    const { sessionToken, user } = useAuth();
+    const {  user } = useAuth();
 
-    if (!sessionToken) {
-        return <Navigate to="/login" />;
-    }
+    // if (!sessionToken) {
+    //     return <Navigate to="/login" />;
+    // }
 
     const checkifUserIsAdmin = async() => {
         try{

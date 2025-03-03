@@ -6,8 +6,8 @@ const Login = () => {
   const { login } = useAuth()
 
   const [ loginForm , setLoginForm ] = useState({
-    email : "",
-    password : ""
+    email : "admin@admin.com",
+    password : "admin"
   })
 
   const handleChange = (e) => {
@@ -18,12 +18,18 @@ const Login = () => {
     })
   }
 
+
+  const handleLogin = (e) => {
+    e.preventDefault()
+    login(loginForm)
+  }
+    
   return (
     <div className='login-container'>
       <h1>Connexion</h1>
       <div className='divider-horizontal'/>
       <p>Pour nos connecter  à l'intranet, entrez votre identifiant et mot de passe</p>
-      <form onSubmit={login} className='login-form'>
+      <form onSubmit={handleLogin} className='login-form'>
         <div className="form-label-input">
           <label htmlFor="email">Email :</label>
           <input 
