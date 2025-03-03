@@ -1,0 +1,64 @@
+import React from 'react'
+import { NavLink } from "react-router-dom";
+import { useAuth } from '../context/AuthContext';
+import { FaRightToBracket } from "react-icons/fa6";
+import { FaRightFromBracket } from "react-icons/fa6";
+import { FaList } from "react-icons/fa";
+
+
+const Header = () => {
+
+  const { isConnected, user, logout } = useAuth()
+
+  return (
+    <header>
+        <div className="header-logo">
+          <img src='/partager-la-base-de-donnees.png' alt="logo intreanet" className='header-logo-intranet' />
+          <span className='header-logo-span'>Intranet</span>
+        </div>
+        <nav>
+            <ul>
+              {isConnected &&
+                <>
+                  <div className="header-nav-link">
+                      <NavLink to='/list'>
+                        <FaList />
+                        Liste
+                      </NavLink>
+                  </div>
+                  <img 
+                    src={user.photo ? user.photo : '/partager-la-base-de-donnees.png' }
+                    alt="photo de profil" 
+                    className='header-profil-img' 
+                  />
+                </>
+                } 
+               {user.isAdmin && 
+                  <div className="header-nav-link">
+                    <NavLink to='/admin/create'>
+                      Ajouter
+                    </NavLink>
+                  </div>
+      }
+                {isConnected ? 
+                  <div 
+                    onClick={logout}
+                    className="header-nav-link"
+                  >
+                    <FaRightFromBracket />
+                    Deconnexion
+                  </div> 
+                :
+                  <div className="header-nav-link">
+                    <FaRightToBracket />
+
+                    <NavLink to='/login'>Connexion</NavLink>
+                  </div>
+                }
+            </ul>
+        </nav>
+    </header>
+  )
+}
+
+export default Header

@@ -1,0 +1,273 @@
+/* ==========================
+      Reset & Base Styles 
+   ========================== */
+
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  a:hover{
+    text-decoration: none;
+    color: #fff;
+  }
+
+
+  body {
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    min-height: 100vh;
+    background-color: #ffffff;
+    color: #333;
+  }
+  
+  #root {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+
+button{
+  padding: 8px 16px;
+  background: linear-gradient(to bottom, #ff4b4b, #ff7eb3);
+  color: #ffffff;
+  border: none;
+  border-radius: 0px;
+  text-transform: uppercase;
+}
+
+label{
+  font-size: 1.2em;
+  color: #333;
+  white-space: nowrap;
+}
+
+input{
+  padding: 8px ;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  background-color: #ffffff;
+  width: 100%;
+  color: #333;
+}
+
+input:focus{
+  outline: none;
+  border: 1px solid #ff4b4b;
+}
+
+.divider-horizontal{
+  height: 1px;
+  width: 100%;
+  background-color: #e3e0e0;
+
+}
+
+
+/* ==========================
+         Header 
+   ========================== */
+
+header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1.5em;
+  background: linear-gradient(to bottom, #ff4b4b, #ff7eb3);}
+
+.header-logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.header-logo-intranet{
+  filter : invert(1) brightness(2);
+}
+
+.header-logo-span{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+nav, ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+
+.header-nav-link, header-nav-link:focus, header-nav-link:hover, header-nav-link:active, a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  color: #ffffff;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.header-nav-link:hover{
+  color: #fff;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #fff;
+}
+
+button:active{
+  background: linear-gradient(to bottom, #ff7eb3, #ff4b4b);
+}
+
+button:focus, button:focus-visible{
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.header-profil-img{
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+/* ==========================
+           Home
+   ========================== */
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+  gap:24px;
+}
+
+.home-question{
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.home-card-container{
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+
+}
+.home-card-img{
+  width: 236px;
+  height: 236px;
+  object-fit: cover;
+}
+
+.home-card-info-container{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.home-card-info-category-container{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  gap: 1em;
+
+}
+.home-card-info-category{
+  background: rgb(59, 118, 206);
+  color: #ffffff;
+  padding: 4px 8px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+.home-card-info{
+  padding: 5px 30px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: grey;
+}
+
+.home-card-info-name{
+  color: #333;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.home-card-info-contact{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-card-info-contact-span{
+  font-size: 16px;
+  color: #d80505;
+  text-decoration: underline;
+}
+
+
+
+.home-button-container{
+
+}
+
+/* ==========================
+           Login
+   ========================== */
+
+.login-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin-top: 2em;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1em;
+  margin-top: 2em;
+  max-width: 500px;
+  width: auto;
+}
+
+.form-label-input{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
+}
+
+.form-button-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.login-form-input{
+  width: 240px;
+}
