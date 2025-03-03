@@ -5,7 +5,7 @@ const homeRouter = express.Router();
 
 
 
-homeRouter.post('/', isAuthenticated, getRandomUser);
+homeRouter.get('/api/random', isAuthenticated, getRandomUser);
 
 
 export default homeRouter;

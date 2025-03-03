@@ -8,7 +8,7 @@ import { FaList } from "react-icons/fa";
 
 const Header = () => {
 
-  const { isConnected, user, logout } = useAuth()
+  const { user, logout } = useAuth()
 
   return (
     <header>
@@ -18,7 +18,7 @@ const Header = () => {
         </div>
         <nav>
             <ul>
-              {isConnected &&
+              {user &&
                 <>
                   <div className="header-nav-link">
                       <NavLink to='/list'>
@@ -27,7 +27,7 @@ const Header = () => {
                       </NavLink>
                   </div>
                   <img 
-                    src={user.photo ? user.photo : '/partager-la-base-de-donnees.png' }
+                    src={user.photo ? user.photo : 'https://randomuser.me/api/portraits/men/74.jpg' }
                     alt="photo de profil" 
                     className='header-profil-img' 
                   />
@@ -40,7 +40,7 @@ const Header = () => {
                     </NavLink>
                   </div>
       }
-                {isConnected ? 
+                {user ? 
                   <div 
                     onClick={logout}
                     className="header-nav-link"

@@ -5,22 +5,7 @@ const AuthContext = createContext(undefined);
 
 const AuthProvider= ({ children }) => {
 
-
-  const [user, setUser] = useState({
-      id: null,
-      gender: '',
-      firstName: '',
-      lastName: '' ,
-      email: '',
-      phone: '',
-      birthdate: '',
-      address: '',
-      city: '',
-      country: '',
-      category: '',
-      photo : '',
-      isAdmin: false
-  });
+  const [user, setUser] = useState({});
 
   const login = async (dataLogin) => {
     try {
@@ -32,7 +17,6 @@ const AuthProvider= ({ children }) => {
       });
   
       const data = await response.json();
-      console.log("Réponse API :", data);
   
       if (data.success) {
         setUser(data.user);
@@ -53,15 +37,22 @@ const AuthProvider= ({ children }) => {
     }
   };
     
-  const checkIfauth= async()=> {
+  const checkIfAuth= async()=> {
     try{
-      const response = await fetch(`${API_URL}/api/user/check`, {
+
+      console.log('checkIfAuth :' )
+      const response = await fetch(`${API_URL}/api/auth/check`, {
         method: 'GET',
         credentials: 'include'
       })
       const data = await response.json()
       if(data.success){
         setUser(data.user)
+        return true
+      }
+      else{
+        setUser(null)
+        return false
       }
     }
     catch(e){
@@ -73,10 +64,12 @@ const AuthProvider= ({ children }) => {
     checkIfAuth()
   },[])
 
+
   const values= {
     user,
     login,
-    logout
+    logout,
+    checkIfAuth
   }
 
   return (

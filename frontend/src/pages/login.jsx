@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
   const { login } = useAuth()
+
+  const navigate = useNavigate()
 
   const [ loginForm , setLoginForm ] = useState({
     email : "admin@admin.com",
@@ -19,9 +22,12 @@ const Login = () => {
   }
 
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
-    login(loginForm)
+    const success = await login(loginForm)
+    if(success){
+      navigate('/')
+    }
   }
     
   return (

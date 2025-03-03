@@ -89,3 +89,26 @@ export const getLogout = async (req, res) => {
       return res.status(500).json({ success: false, message: "Erreur lors de la déconnexion" });
     }
   };
+
+export const getCheck = async (req, res) => {
+    try{
+        const { token } = req.session;
+        if(!token){
+            return res.status(401).json({ success: false, message: "Non autorisé. Veuillez vous connecter." });
+        }
+        const user = await UserModel.findOne({ _id: req.session.user.id });
+        if(!user){
+            return res.status(401).json({ success: false, message: "Non autorisé. Veuillez vous connecter." });
+        }
+        
+        res.status(200).json({ 
+            success: true, 
+            user: req.session.user 
+        });
+
+    }
+    catch(error){
+        console.log("Erreur checkIfAuth :", error);
+        return res.status(500).json({ success: false, message: "Erreur lors de la vérification de l'utilisateur" });
+    }
+};

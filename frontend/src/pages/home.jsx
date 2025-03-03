@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { IoIosMail } from "react-icons/io";
 import { FaPhone, FaBirthdayCake } from "react-icons/fa";
 import { formatDate, formatAge } from '/src/utils/utils.js'
+const VITE_URL = import.meta.env.VITE_API_URL
+
 const Home = () => {
 
   const [randomUser, setRandomUser] = useState({
@@ -20,22 +22,22 @@ const Home = () => {
   })
 
 
-  const handleContact = async () => {
+  const handleRandomiser = async () => {
     try{
 
       // requete pour fetch un document au hasard sauf le mien pour recup ses informations
-      // const response = await fetch('{import.meta.env.VITE_API_URL}/users/random/:id', {
-      //   method: 'GET',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `Bearer ${sessionToken}`
-      //   }
-      // })
-      // const data = await response.json()
-      // if(!response.ok){
-      //   throw new Error(data.message)
-      // }
-      // setRandomUser(data)
+      const response = await fetch(`${VITE_URL}/api/random`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${sessionToken}`
+        }
+      })
+      const data = await response.json()
+      if(!response.ok){
+        throw new Error(data.message)
+      }
+      setRandomUser(data)
     }
     catch(error){
       console.log('Erreur home button:',error)
@@ -81,7 +83,7 @@ const Home = () => {
       </div>
       <div className="home-button-container">
         <button
-          onClick={handleContact}
+          onClick={handleRandomiser}
         >
           Dire bonjour a quelqu'un d'autre
         </button>

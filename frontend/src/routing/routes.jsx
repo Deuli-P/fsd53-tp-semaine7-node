@@ -24,13 +24,13 @@ export const router = createBrowserRouter([
           { index: true, element: <Home /> },
           { path: "list", element: <UserList /> },
           { path: "profil-edit", element:<EditProfile />},
-        ]
-      },
-      { 
-        element : <AdminMiddleware />,
-        children: [
-          { path: "admin/create", element: <CreateAdmin /> },
-          { path: "admin/edit/:id", element:  <EditProfile /> },
+          { parh: 'admin', element : <AdminMiddleware/>,
+            children: [
+              { path: "admin/create", element: <CreateAdmin /> },
+              { path: "admin/edit/:id", element:  <EditProfile /> },
+            ]
+
+          }
         ]
       },
       {path: '*', element: <Navigate to='/' replace />},

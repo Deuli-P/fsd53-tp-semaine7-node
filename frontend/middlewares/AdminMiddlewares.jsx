@@ -1,16 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "/src/context/AuthContext";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const AdminMiddleware = () => {
     const {  user } = useAuth();
 
-    // if (!sessionToken) {
-    //     return <Navigate to="/login" />;
-    // }
 
     const checkifUserIsAdmin = async() => {
+
         try{
-            // const response = await fetch({`${import.meta.env.VITE_API_URL}/users/${user.id}`}, {
+            // const response = await fetch(`${API_URL}/user/${user.id}`, {
             //     method: 'GET',
             //     headers: {
             //         'Content-Type': 'application/json',
@@ -30,9 +29,7 @@ const AdminMiddleware = () => {
         }
     }
 
-    // chercher dans la DB si l'utilisateur existe
-    // Si il existe vérifier que c'est un admin 
-
+   
     
     if (!user.isAdmin) {
         return <Navigate to="/login" />;
