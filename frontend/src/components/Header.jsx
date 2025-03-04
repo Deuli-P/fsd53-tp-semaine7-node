@@ -14,7 +14,7 @@ const Header = () => {
     <header>
         <div className="header-logo">
           <img src='/partager-la-base-de-donnees.png' alt="logo intreanet" className='header-logo-intranet' />
-          <span className='header-logo-span'>Intranet</span>
+          <NavLink to='/' className='header-logo-span'>Intranet</NavLink>
         </div>
         <nav>
             <ul>
@@ -33,13 +33,15 @@ const Header = () => {
                   />
                 </>
                 } 
-               {user.isAdmin && 
-                  <div className="header-nav-link">
-                    <NavLink to='/admin/create'>
-                      Ajouter
-                    </NavLink>
-                  </div>
-      }
+               {user && user.isAdmin && 
+                  (
+                    <div className="header-nav-link">
+                      <NavLink to='/admin/create'>
+                        Ajouter
+                      </NavLink>
+                    </div>
+                  )
+                }
                 {user ? 
                   <div 
                     onClick={logout}

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import ErrorMessage from '../components/ErrorMessage';
 
 const Login = () => {
 
-  const { login } = useAuth()
+  const { login, checkIfAuth } = useAuth()
 
   const navigate = useNavigate()
 
@@ -12,6 +13,7 @@ const Login = () => {
     email : "admin@admin.com",
     password : "admin"
   })
+  const [ message , setMessage ] = useState(null)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -24,17 +26,26 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    const success = await login(loginForm)
-    if(success){
+    const responses = await login(loginForm)
+    if(responses.message ){
+      setMessage(responses.message)
+    }
+    else{
+      await checkIfAuth();
       navigate('/')
     }
   }
-    
+
+
+  useEffect(() => {
+    console.log('message :', message)
+  },[message])
+
   return (
     <div className='login-container'>
       <h1>Connexion</h1>
       <div className='divider-horizontal'/>
-      <p>Pour nos connecter  à l'intranet, entrez votre identifiant et mot de passe</p>
+      <p>Pour vous connecter à l'intranet, entrez votre identifiant et mot de passe</p>
       <form onSubmit={handleLogin} className='login-form'>
         <div className="form-label-input">
           <label htmlFor="email">Email :</label>
@@ -65,6 +76,7 @@ const Login = () => {
             type="submit">Connexion</button>
         </div>
       </form>
+      {message && <ErrorMessage content={message} />}
     </div>
   )
 }

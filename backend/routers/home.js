@@ -4,7 +4,6 @@ import { isAuthenticated } from "../middlewares/authMiddleware.js";
 const homeRouter = express.Router();
 
 
-
 homeRouter.get('/api/random', isAuthenticated, getRandomUser);
 
 

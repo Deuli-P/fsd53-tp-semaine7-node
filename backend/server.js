@@ -48,11 +48,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", homeRouter);
 app.use("/api/auth", authRouter);
-app.use("/api/lists", listRouter);
+app.use("/api/list", listRouter);
 
-// ==========
-// App start
-// ==========
+
+
+
+
 
 app.listen(APP_PORT, () => {
   console.log(`App listening at http://${APP_HOSTNAME}:${APP_PORT}`);

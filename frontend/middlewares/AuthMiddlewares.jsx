@@ -3,7 +3,7 @@ import { useAuth } from "/src/context/AuthContext";
 
 const AuthMiddleware = () => {
     
-    const { user } = useAuth();
+    const { user} = useAuth();
 
 
     if (!user) {

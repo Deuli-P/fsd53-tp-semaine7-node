@@ -1,7 +1,6 @@
 import UserModel from "../Models/User.js";
 
 
-
 export const checkAdmin = async (req, res) => {
     try {
         const { id } = req.session;

@@ -3,26 +3,28 @@ const  API_URL = import.meta.env.VITE_API_URL;
 
 const AuthContext = createContext(undefined);
 
+
+
 const AuthProvider= ({ children }) => {
 
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
   const login = async (dataLogin) => {
     try {
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json" 
+        },
         credentials: "include",
         body: JSON.stringify(dataLogin),
       });
   
       const data = await response.json();
-  
-      if (data.success) {
+      if (data) {
         setUser(data.user);
-      } else {
-        console.log("Erreur de connexion :", data.message);
       }
+      return data;
     } catch (error) {
       console.log("Erreur catch login :", error);
     }
@@ -30,7 +32,11 @@ const AuthProvider= ({ children }) => {
   
   const logout = async () => {
     try {
-      await fetch(`${API_URL}/api/auth/logout`, { method: "GET", credentials: "include" });
+      console.log('logout')
+      await fetch(`${API_URL}/api/auth/logout`, { 
+        method: "GET", 
+        credentials: "include" 
+      });
       setUser(null);
     } catch (error) {
       console.log("Erreur catch logout :", error);

@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "./Layout"; // Good
 import Error from "../pages/Error"; // Good
-import UserList from "../pages/userList";
+import UserList from "../pages/UserList";
 import EditProfile from "../pages/profil";
 import Login from "../pages/login";
 import CreateAdmin from "../pages/admin/create";

@@ -7,8 +7,6 @@ import { regexEmail } from "../utils/utils.js";
 export const postLogin = async (req, res) => {
     try{
 
-        console.log('body', req.body);
-
         const { email, password } = req.body;
 
         // ========= SCURITY ============
@@ -18,7 +16,7 @@ export const postLogin = async (req, res) => {
         }
         // Check si le mot de passe à les bonnes longueurs
         if(password.length < 5 || password.length > 255) {
-            return res.status(400).json({message :"Le mot de passe doit faire minimum 8 caractères et maximum 255 caractères"});
+            return res.status(400).json({message :"Le mot de passe doit faire minimum 5 caractères et maximum 255 caractères"});
         }
 
         // Check du format de l'email
@@ -63,7 +61,6 @@ export const postLogin = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Connexion réussie",
             user: req.session.user
         })
 
