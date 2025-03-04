@@ -2,38 +2,71 @@ import React from 'react'
 import { IoIosMail } from "react-icons/io";
 import { FaPhone, FaBirthdayCake } from "react-icons/fa";
 import { formatDate, formatAge } from '/src/utils/utils.js'
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
-const Card = ({user}) => {
+const Card = ({userData}) => {
+
+  const {user } = useAuth();
+
+  const navigate = useNavigate();
+
+  const handleEdituserData = () => {
+    console.log('Edit userData')
+    navigate(`/admin/edit/${userData._id}`)
+  }
+
+  const handleDeleteuserData = async () => {
+    console.log('Delete userData')
+
+    // const response = await fetch(`http://localhost:3001/api/users/${userData.id}`, {
+
+  }
+
   return (
     <div className="card-container">
             <img 
-              src={user.photo ? user.photo : 'https://user.me/api/portraits/men/74.jpg'} 
-              alt={`Photo de ${user.firstname}`}
+              src={userData.photo ? userData.photo : 'https://userData.me/api/portraits/men/74.jpg'} 
+              alt={`Photo de ${userData.firstname}`}
               className='card-img'
             />
             <div className="card-info-container">
               <div className="card-info-category-container">
-                <span className="card-info-category">{user.category}</span>
+                <span className="card-info-category">{userData.category}</span>
               </div>
               <div className="card-info">
                 <div className="card-info-name-age-container">
-                  <span className="card-info-name">{user.firstname} {user.lastname}</span>
-                  <span className="card-info-age">{` (${formatAge(user.birthdate)} ans)`} </span>
+                  <span className="card-info-name">{userData.firstname} {userData.lastname}</span>
+                  <span className="card-info-age">{` (${formatAge(userData.birthdate)} ans)`} </span>
                 </div>
-                <p>{user.city}, {user.country}</p>
+                <p>{userData.city}, {userData.country}</p>
                 <div className="card-info-contact">
                   <IoIosMail />
-                  <span className='card-info-contact-span'>{user.email}</span>
+                  <span className='card-info-contact-span'>{userData.email}</span>
                 </div>
                 <div className="card-info-contact">
                   <FaPhone />
-                  <span className='card-info-contact-span'>{user.phone}</span>
+                  <span className='card-info-contact-span'>{userData.phone}</span>
                 </div>
                 <div className="card-info-contact">
                   <FaBirthdayCake />
-                  <p>{`Anniversaire : ${formatDate(user.birthdate)}`}</p>
+                  <p>{`Anniversaire : ${formatDate(userData.birthdate)}`}</p>
                 </div>
+                {user.isAdmin &&
+                  <div className="card-info-admin-button">
+                    <button
+                      onClick={handleEdituserData}
+                    >
+                      Éditer
+                    </button>
+                    <button
+                      onClick={handleDeleteuserData}  
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                }
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@ import Layout from "./Layout"; // Good
 import Error from "../pages/Error"; // Good
 import UserList from "../pages/UserList";
 import EditProfile from "../pages/profil";
+import AdminEdit from "../pages/admin/edit";
 import Login from "../pages/login";
 import CreateAdmin from "../pages/admin/create";
 import Home from "../pages/Home";
@@ -23,11 +24,11 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <Home /> },
           { path: "list", element: <UserList /> },
-          { path: "profil-edit", element:<EditProfile />},
+          { path: "profil/edit", element:<EditProfile />},
           { parh: 'admin', element : <AdminMiddleware/>,
             children: [
               { path: "admin/create", element: <CreateAdmin /> },
-              { path: "admin/edit/:id", element:  <EditProfile /> },
+              { path: "admin/edit/:id", element:  <AdminEdit /> },
             ]
 
           }

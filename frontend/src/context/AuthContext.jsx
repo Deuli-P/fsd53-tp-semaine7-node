@@ -21,6 +21,7 @@ const AuthProvider= ({ children }) => {
       });
   
       const data = await response.json();
+      console.log('data user:', data)
       if (data) {
         setUser(data.user);
       }
@@ -75,7 +76,8 @@ const AuthProvider= ({ children }) => {
     user,
     login,
     logout,
-    checkIfAuth
+    checkIfAuth,
+    setUser
   }
 
   return (

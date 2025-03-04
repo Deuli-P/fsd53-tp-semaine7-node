@@ -14,7 +14,6 @@ export const isAuthenticated = (req, res, next) => {
       });
     }
 
-    console.log('sessionToken auth middleaware :', sessionToken)
     const token = jwt.verify(sessionToken, process.env.JWT_SECRET);
     const user = UserModel.findOne({ _id: token.id });
 

@@ -2,7 +2,9 @@ import React from 'react'
 
 const Error = () => {
   return (
-    <div>Error 404</div>
+    <main>
+      Cette page n'existe pas, erreur 404
+    </main>
   )
 }
 

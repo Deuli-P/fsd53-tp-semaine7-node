@@ -42,7 +42,7 @@ const Login = () => {
   },[message])
 
   return (
-    <div className='login-container'>
+    <main className='login-container'>
       <h1>Connexion</h1>
       <div className='divider-horizontal'/>
       <p>Pour vous connecter à l'intranet, entrez votre identifiant et mot de passe</p>
@@ -56,7 +56,7 @@ const Login = () => {
             required 
             onChange={(e)=>handleChange(e)}
             value={loginForm.email}
-            className='login-form-input'
+            className='form-input'
           />
         </div>
         <div className="form-label-input">
@@ -68,7 +68,7 @@ const Login = () => {
             required 
             onChange={(e)=>handleChange(e)}
             value={loginForm.password}
-            className='login-form-input'
+            className='form-input'
           />
         </div>
         <div className="form-button-container">
@@ -77,7 +77,7 @@ const Login = () => {
         </div>
       </form>
       {message && <ErrorMessage content={message} />}
-    </div>
+    </main>
   )
 }
 

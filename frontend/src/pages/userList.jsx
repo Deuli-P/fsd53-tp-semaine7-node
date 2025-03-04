@@ -8,7 +8,7 @@ const UserList = () => {
   const optionCategory= ['Client','Technique','Marketing'];
 
   const [ query, setQuery ] = useState({
-    search_query: null,
+    search_query: '',
     category: null
   });
   const [ userList, setUserList ] = useState([]);
@@ -48,7 +48,6 @@ const UserList = () => {
         credentials: 'include'
       });
       const data = await response.json();
-      console.log('data :', data)
       setUserList(data);
     }
     catch (error) {
@@ -67,7 +66,7 @@ const UserList = () => {
 
   useEffect
   return (
-    <div className='userList-container'>
+    <main className='userList-container'>
       <h1>Liste des utilisateurs</h1>
       <div className='divider-horizontal'/>
       <div className="userList-filters-container">
@@ -85,9 +84,9 @@ const UserList = () => {
           <label htmlFor="">Catégorie :</label>
           <select name="category" id="select-category" onChange={(e)=> handleChangeQuery(e)}>
             <option>- Aucun -</option>
-            {optionCategory.map((option) => (
+            {optionCategory.map((option, index) => (
               <option 
-                key={option} 
+                key={index} 
                 value={option}
                 className='useList-category-option'
               >
@@ -103,11 +102,11 @@ const UserList = () => {
           <p>Aucun utilisateur trouvé</p>
         </div>
         }
-        {userList.map((user) => (
-          <Card key={user.id} user={user} />
+        {userList.map((user,index) => (
+          <Card key={"card_"+index} userData={user} />
         ))}
       </div>
-    </div>
+    </main>
   )
 }
 

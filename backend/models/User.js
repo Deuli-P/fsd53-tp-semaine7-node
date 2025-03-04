@@ -33,8 +33,8 @@ const UserSchema = new mongoose.Schema({
         minLenght: 8,
         maxLenght: 255
     },
-    birthday: {
-        type: Date,
+    birthdate: {
+        type: String,
         required: true
     },
     country: {

@@ -45,12 +45,12 @@ const Home = () => {
 
 
   return (
-    <div className="home-container">
+    <main className="home-container">
      <h1>Bienvenue sur l'intranet</h1>
       <p>La plate-forme de l'entreprise qui vous permet de retrouver tous vos collaborateurs.</p>
       <span className='home-question'>Avez-vous dit bonjour à :</span>
       {randomUser ?
-        <Card user={randomUser} />
+        <Card userData={randomUser} />
       :
         <ErrorMessage
           content='Erreur de chargement du collaborateur'
@@ -63,7 +63,7 @@ const Home = () => {
           Dire bonjour a quelqu'un d'autre
         </button>
       </div>
-    </div>
+    </main>
   )
 }
 

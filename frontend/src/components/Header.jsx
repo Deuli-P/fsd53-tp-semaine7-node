@@ -26,11 +26,13 @@ const Header = () => {
                         Liste
                       </NavLink>
                   </div>
-                  <img 
-                    src={user.photo ? user.photo : 'https://randomuser.me/api/portraits/men/74.jpg' }
-                    alt="photo de profil" 
-                    className='header-profil-img' 
-                  />
+                  <NavLink to='/profil/edit'>
+                    <img 
+                      src={user.photo ? user.photo : 'https://randomuser.me/api/portraits/men/74.jpg' }
+                      alt="photo de profil" 
+                      className='header-profil-img' 
+                    />
+                  </NavLink>
                 </>
                 } 
                {user && user.isAdmin && 
@@ -53,7 +55,6 @@ const Header = () => {
                 :
                   <div className="header-nav-link">
                     <FaRightToBracket />
-
                     <NavLink to='/login'>Connexion</NavLink>
                   </div>
                 }

@@ -9,6 +9,7 @@ import connectDB from "./config/databases.js";
 import listRouter from "./routers/list.js";
 import homeRouter from "./routers/home.js";
 import cors from "cors";
+import profileRouter from "./routers/profile.js";
 
 // ==========
 // App initialization
@@ -49,10 +50,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", homeRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/list", listRouter);
-
-
-
-
+app.use('/api/profile', profileRouter);
 
 
 app.listen(APP_PORT, () => {

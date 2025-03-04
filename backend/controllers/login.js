@@ -44,14 +44,13 @@ export const postLogin = async (req, res) => {
 
         // Token stocké dans les cookies
         req.session.token = newToken;
-        req.session.token = newToken;
         req.session.user = {
             id: userExist._id,
-            firstName: userExist.firstname,
-            lastName: userExist.lastname,
+            firstname: userExist.firstname,
+            lastname: userExist.lastname,
             email: userExist.email,
             phone: userExist.phone,
-            birthdate: userExist.birthday,
+            birthdate: userExist.birthdate,
             address: userExist.address,
             city: userExist.city,
             country: userExist.country,
