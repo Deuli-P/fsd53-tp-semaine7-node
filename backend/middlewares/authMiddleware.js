@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import UserModel from "../Models/User.js";
 
-
+// Middleware pour vérifier si l'utilisateur est connecté
 export const isAuthenticated = (req, res, next) => {
 
     const sessionToken = req.session.token;

@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { regexEmail } from "../utils/utils.js";
 
-
+// Fonction pour changer les info d'un autre utilisateur
 export const adminChangeProfile = async (req, res)=> {
     try {
 
@@ -17,10 +17,9 @@ export const adminChangeProfile = async (req, res)=> {
         };
 
         if(data.password){
-            if(data.password.length < 8 || data.password.length > 255){
+            if(data.password.length < 5 || data.password.length > 255){
                 return res.status(400).json({ success: false, message: "Mot de passe non valide." });
             };
-
             data.password = await bcrypt.hash(data.password, 10);
         }
         else{
@@ -45,6 +44,7 @@ export const adminChangeProfile = async (req, res)=> {
     } 
 }
 
+// Fonction pour supprimer le profil d'un autre utilisateur
 export const deleteProfileUser = async (req, res)=> {
     try {
         const { id } = req.body;
@@ -63,6 +63,7 @@ export const deleteProfileUser = async (req, res)=> {
     } 
 }
 
+// Fonction pour vérifier si je suis admin ou pas
 export const AmIAdmin = async (req, res)=> {
     try {
 
@@ -97,6 +98,7 @@ export const AmIAdmin = async (req, res)=> {
     } 
 }
 
+//Fonction pour creer un nouvel utilisateur
 export const createNewUser = async (req, res)=> {
     try{
         const sessionToken = req.session.token;

@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { regexEmail } from "../utils/utils.js";
 
-
+// Fonction pour changer ses informations
 export const getChangeProfile = async (req, res) => {
     try {
 
@@ -43,6 +43,22 @@ export const getChangeProfile = async (req, res) => {
         });
 
         if(newUser){
+            req.session.user = {
+                id: newUser._id,
+                firstname: newUser.firstname,
+                lastname: newUser.lastname,
+                email: newUser.email,
+                gender: newUser.gender,
+                category: newUser.category,
+                phone: newUser.phone,
+                birthdate: newUser.birthdate,
+                address: newUser.address,
+                city: newUser.city,
+                country: newUser.country,
+                photo: newUser.photo,
+                isAdmin: newUser.isAdmin
+            };
+
             res.status(200).json({ 
                 success: true,
                 message: "Profil modifié avec succès." ,
@@ -54,7 +70,7 @@ export const getChangeProfile = async (req, res) => {
         res.status(500).json({ message: error.message });
     } 
 }
-
+// Fonction pour charger les info d'un autre utilisateur
 export const getProfileUser = async (req,res) => {
     try{
         const { id } = req.params;

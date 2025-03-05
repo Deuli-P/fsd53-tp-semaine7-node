@@ -1,6 +1,7 @@
 import UserModel from "../Models/User.js";
 import jwt from 'jsonwebtoken';
 
+// Fonction pour récupérer un utilisateur aléatoire sauf celui connecté
 export const getRandomUser = async (req, res) => {
     try{
 

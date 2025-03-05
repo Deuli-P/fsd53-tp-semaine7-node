@@ -58,9 +58,9 @@ const EditProfile = () => {
 
       const newInfo = {
         gender: userForm.gender,
-        firstname: userForm.firstname,
-        lastname: userForm.lastname,
-        email: userForm.email,
+        firstname: userForm.firstname.trim(),
+        lastname: userForm.lastname.trim(),
+        email: userForm.email.trim(),
         phone: userForm.phone,
         birthdate: formatDateForInput(userForm.birthdate),
         city: userForm.city,
@@ -120,7 +120,7 @@ const EditProfile = () => {
                 required 
                 className='form-input'
                 onChange={(e)=> handleChange(e)}
-                value={userForm.gender}
+                value={userForm?.gender}
               >
               <option value="male">Homme</option>
               <option value="female">Femme</option>

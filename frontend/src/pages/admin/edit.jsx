@@ -76,14 +76,14 @@ const AdminEdit = () => {
     try{
       const newInfo = {
         gender: userForm.gender,
-        firstname: userForm.firstname,
-        lastname: userForm.lastname,
-        email: userForm.email,
-        phone: userForm.phone,
+        firstname: userForm.firstname.trim(),
+        lastname: userForm.lastname.trim(),
+        email: userForm.email.trim(),
+        phone: userForm.phone.trim(),
         birthdate: formatDateForInput(userForm.birthdate),
-        city: userForm.city,
-        country: userForm.country,
-        photo: userForm.photo ,
+        city: userForm.city.trim(),
+        country: userForm.country.trim(),
+        photo: userForm.photo.trim(),
         category: userForm.category,
         password : password ? password : undefined
       }

@@ -32,6 +32,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(session({
   name : 'session_token',
   secret : 'session_token',
@@ -51,8 +52,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", homeRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/list", listRouter);
-app.use('/api/profile', profileRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/profile', profileRouter);
 
 
 app.listen(APP_PORT, () => {

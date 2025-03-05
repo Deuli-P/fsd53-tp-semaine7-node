@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import UserModel from "../Models/User.js";
 import { regexEmail } from "../utils/utils.js";
 
-
+// Fonction pour se connecter
 export const postLogin = async (req, res) => {
     try{
 
@@ -49,6 +49,7 @@ export const postLogin = async (req, res) => {
             firstname: userExist.firstname,
             lastname: userExist.lastname,
             email: userExist.email,
+            gender: userExist.gender,
             category: userExist.category,
             phone: userExist.phone,
             birthdate: userExist.birthdate,
@@ -70,6 +71,7 @@ export const postLogin = async (req, res) => {
     }
 };
 
+// Fonction pour se deconnecter
 export const getLogout = async (req, res) => {
     try {
       req.session.destroy((err) => {
@@ -84,17 +86,42 @@ export const getLogout = async (req, res) => {
     }
   };
 
+
+// Fonction pour check si on est connecté a chaque lancement de la page
 export const getCheck = async (req, res) => {
     try{
-        const { token } = req.session;
+        const sessionToken = req.session.token;
+
+        if(!sessionToken){
+            return res.status(401).json({ success: false, message: "Non autorisé. Veuillez vous connecter." });
+        }
+        const token = jwt.verify(sessionToken, process.env.JWT_SECRET);
+
         if(!token){
             return res.status(401).json({ success: false, message: "Non autorisé. Veuillez vous connecter." });
         }
+
         const user = await UserModel.findOne({ _id: req.session.user.id });
         if(!user){
             return res.status(401).json({ success: false, message: "Non autorisé. Veuillez vous connecter." });
         }
         
+        req.session.user = {
+            id: user._id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            gender: user.gender,
+            category: user.category,
+            phone: user.phone,
+            birthdate: user.birthdate,
+            address: user.address,
+            city: user.city,
+            country: user.country,
+            photo: user.photo,
+            isAdmin: user.isAdmin
+        };
+
         res.status(200).json({ 
             success: true, 
             user: req.session.user 

@@ -1,6 +1,8 @@
 import UserModel from "../Models/User.js";
 import jwt from 'jsonwebtoken';
 
+
+// Fonction pour récupérer la liste des utilisateurs sauf celui connecté
 export const getListUsers = async (req, res) => {
 
     try {

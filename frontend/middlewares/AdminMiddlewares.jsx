@@ -1,6 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
 const API_URL = import.meta.env.VITE_API_URL;
 
+
+// Middleware pour vérifier si l'utilisateur est admin
 const AdminMiddleware = () => {
 
     const checkifUserIsAdmin = async() => {
@@ -29,7 +31,7 @@ const AdminMiddleware = () => {
     }
 
     checkifUserIsAdmin();
-    
+
     return <Outlet />;
 }
 
