@@ -1,4 +1,4 @@
-
+const API_URL = import.meta.env.VITE_API_URL;
 
 
 export const formatDate = (date) => {
@@ -28,3 +28,27 @@ if (!dateString) return "";
 return new Date(dateString).toISOString().split('T')[0];
 };
 
+export const adminDeleteUser = async (id) => {
+    try{
+        const response = await fetch(`${API_URL}/api/admin/delete`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({id: id})
+        })
+
+        const data = await response.json()
+
+        if(!response.ok){
+            throw new Error( data.message)
+        }
+        if(data.success){
+            return true
+        }
+    }
+    catch(error){
+        console.log('Erreur admin delete:', error)
+    }
+}

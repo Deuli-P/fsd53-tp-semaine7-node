@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext';
 import Card from '../components/Card';
 import ErrorMessage from '../components/ErrorMessage';
+import { adminDeleteUser } from '../utils/utils';
 const VITE_URL = import.meta.env.VITE_API_URL
 
 const Home = () => {
@@ -39,6 +40,14 @@ const Home = () => {
     }
   };
 
+  const handleDelete = async(id) => {
+    const action = await adminDeleteUser(id)
+
+    if(action){
+      handleRandomiser()
+    }
+  };
+
   useEffect(() => {
     handleRandomiser()
   }, [])
@@ -50,7 +59,10 @@ const Home = () => {
       <p>La plate-forme de l'entreprise qui vous permet de retrouver tous vos collaborateurs.</p>
       <span className='home-question'>Avez-vous dit bonjour à :</span>
       {randomUser ?
-        <Card userData={randomUser} />
+        <Card 
+          userData={randomUser} 
+          handleDelete={handleDelete}
+        />
       :
         <ErrorMessage
           content='Erreur de chargement du collaborateur'

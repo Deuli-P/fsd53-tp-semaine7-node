@@ -1,5 +1,6 @@
 import {useState, useEffect } from 'react'
 import Card from '../components/Card';
+import { adminDeleteUser } from '../utils/utils';
 const  API_URL = import.meta.env.VITE_API_URL;
 
 const UserList = () => {
@@ -55,6 +56,14 @@ const UserList = () => {
     }
   };
 
+  const handleDelete = async(id) => {
+    const action = await adminDeleteUser(id)
+
+    if(action){
+      handleListUser()
+    }
+  }
+
   useEffect(() => {
     handleListUser();
   },[]);
@@ -103,7 +112,11 @@ const UserList = () => {
         </div>
         }
         {userList.map((user,index) => (
-          <Card key={"card_"+index} userData={user} />
+          <Card 
+            key={"card_"+index} 
+            userData={user} 
+            handleDelete={handleDelete}
+          />
         ))}
       </div>
     </main>

@@ -65,7 +65,6 @@ export const postLogin = async (req, res) => {
 
     }
     catch (error) {
-        console.log("Erreur catch login :",error);
         return res.status(500).json({message :"Erreur lors de la connexion"});
     }
 };
@@ -74,14 +73,12 @@ export const getLogout = async (req, res) => {
     try {
       req.session.destroy((err) => {
         if (err) {
-          console.log("Erreur lors de la suppression de session :", err);
           return res.status(500).json({ success: false, message: "Erreur lors de la déconnexion" });
         }
         res.clearCookie("session_token");
         res.status(200).json({ success: true, message: "Déconnexion réussie" });
       });
     } catch (error) {
-      console.log("Erreur catch logout :", error);
       return res.status(500).json({ success: false, message: "Erreur lors de la déconnexion" });
     }
   };
@@ -104,7 +101,6 @@ export const getCheck = async (req, res) => {
 
     }
     catch(error){
-        console.log("Erreur checkIfAuth :", error);
         return res.status(500).json({ success: false, message: "Erreur lors de la vérification de l'utilisateur" });
     }
 };

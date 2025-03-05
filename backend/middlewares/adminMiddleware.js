@@ -18,9 +18,6 @@ export const isAdmin = async (req, res, next) => {
     const token = jwt.verify(sessionToken, process.env.JWT_SECRET);
     const user = await UserModel.findOne({ _id: token.id });
     
-    
-    console.log('adminmiddlewara user find')
-
     // verifie avec le token de jwt si c'est bon ou pas et check si le token session est bon ou pas
     if (!user) {
         res.session.destroy();
