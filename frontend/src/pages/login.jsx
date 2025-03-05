@@ -10,8 +10,8 @@ const Login = () => {
   const navigate = useNavigate()
 
   const [ loginForm , setLoginForm ] = useState({
-    email : "admin@admin.com",
-    password : "admin"
+    email : "",
+    password : ""
   })
   const [ message , setMessage ] = useState(null)
 
@@ -56,6 +56,7 @@ const Login = () => {
             type="email" 
             name="email" 
             id="email" 
+            placeholder='ex: owen.lopez@example.com'
             required 
             onChange={(e)=>handleChange(e)}
             value={loginForm.email}
