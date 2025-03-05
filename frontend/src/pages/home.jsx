@@ -36,7 +36,7 @@ const Home = () => {
       setRandomUser(data)
     }
     catch(error){
-      console.log('Erreur home button:',error)
+      throw new Error('Erreur home randomizer :',error)
     }
   };
 

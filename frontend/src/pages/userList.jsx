@@ -5,7 +5,6 @@ const  API_URL = import.meta.env.VITE_API_URL;
 
 const UserList = () => {
 
-
   const optionCategory= ['Client','Technique','Marketing'];
 
   const [ query, setQuery ] = useState({
@@ -52,7 +51,7 @@ const UserList = () => {
       setUserList(data);
     }
     catch (error) {
-      console.log('Erreur lors de la récupération des utilisateurs', error)
+      throw new Error('Erreur lors de la récupération des utilisateurs', error)
     }
   };
 

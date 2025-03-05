@@ -5,10 +5,10 @@ import UserList from "../pages/UserList";
 import EditProfile from "../pages/profil";
 import AdminEdit from "../pages/admin/edit";
 import Login from "../pages/login";
-import CreateAdmin from "../pages/admin/create";
 import Home from "../pages/Home";
 import AuthMiddleware from "../../middlewares/AuthMiddlewares";
 import AdminMiddleware from "../../middlewares/AdminMiddlewares";
+import AdminCreate from "../pages/admin/create";
 
 
 
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
           { path: "profil/edit", element:<EditProfile />},
           { parh: 'admin', element : <AdminMiddleware/>,
             children: [
-              { path: "admin/create", element: <CreateAdmin /> },
+              { path: "admin/create", element: <AdminCreate /> },
               { path: "admin/edit/:id", element:  <AdminEdit /> },
             ]
 

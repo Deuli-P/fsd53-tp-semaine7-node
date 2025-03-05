@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 import { FaRightToBracket } from "react-icons/fa6";
 import { FaRightFromBracket } from "react-icons/fa6";
-import { FaList } from "react-icons/fa";
+import { FaList, FaUser } from "react-icons/fa";
 
 
 const Header = () => {
@@ -19,39 +19,40 @@ const Header = () => {
         <nav>
             <ul>
               {user &&
-                <>
                   <div className="header-nav-link">
                       <NavLink to='/list'>
                         <FaList />
                         Liste
                       </NavLink>
                   </div>
-                  <NavLink to='/profil/edit'>
-                    <img 
-                      src={user.photo ? user.photo : 'https://randomuser.me/api/portraits/men/74.jpg' }
-                      alt="photo de profil" 
-                      className='header-profil-img' 
-                    />
-                  </NavLink>
-                </>
                 } 
                {user && user.isAdmin && 
                   (
                     <div className="header-nav-link">
                       <NavLink to='/admin/create'>
+                      <FaUser />
                         Ajouter
                       </NavLink>
                     </div>
                   )
                 }
                 {user ? 
-                  <div 
-                    onClick={logout}
-                    className="header-nav-link"
-                  >
-                    <FaRightFromBracket />
-                    Deconnexion
-                  </div> 
+                  <>
+                    <NavLink to='/profil/edit'>
+                      <img 
+                        src={user.photo ? user.photo : 'https://randomuser.me/api/portraits/men/74.jpg' }
+                        alt="photo de profil" 
+                        className='header-profil-img' 
+                      />
+                    </NavLink>
+                    <div 
+                      onClick={logout}
+                      className="header-nav-link"
+                    >
+                      <FaRightFromBracket />
+                      Deconnexion
+                    </div> 
+                  </>
                 :
                   <div className="header-nav-link">
                     <FaRightToBracket />

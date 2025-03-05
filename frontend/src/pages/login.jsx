@@ -44,10 +44,6 @@ const Login = () => {
   },[user, navigate])
 
 
-  useEffect(() => {
-    console.log('message :', message)
-  },[message])
-
   return (
     <main className='login-container'>
       <h1>Connexion</h1>

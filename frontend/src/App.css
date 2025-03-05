@@ -363,7 +363,7 @@ button:focus, button:focus-visible{
                EDIT
        ========================== */
 
-.edit-profile-container{
+.page-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -372,7 +372,7 @@ button:focus, button:focus-visible{
   padding-top: 30px;
   }
 
-.edit-profile-form{
+.page-form{
 display: flex;
 flex-direction: column;
 justify-content: flex-end;

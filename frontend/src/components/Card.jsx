@@ -13,12 +13,10 @@ const Card = ({userData, handleDelete}) => {
   const navigate = useNavigate();
 
   const handleEdituserData = () => {
-    console.log('Edit userData')
     navigate(`/admin/edit/${userData._id}`)
   }
 
   const handleDeleteuserData = async () => {
-    console.log('Delete userData')
     handleDelete(userData._id)
   }
 
@@ -26,7 +24,7 @@ const Card = ({userData, handleDelete}) => {
     <>
       <div className="card-container">
         <img 
-          src={userData.photo ? userData.photo : 'https://userData.me/api/portraits/men/74.jpg'} 
+          src={userData.photo.length > 0 ? userData.photo : 'https://www.randomkittengenerator.com/cats/146354.1.jpg'} 
           alt={`Photo de ${userData.firstname}`}
           className='card-img'
         />

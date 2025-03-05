@@ -21,33 +21,29 @@ const AuthProvider= ({ children }) => {
       });
   
       const data = await response.json();
-      console.log('data user:', data)
       if (data) {
         setUser(data.user);
       }
       return data;
     } catch (error) {
-      console.log("Erreur catch login :", error);
+      throw new Error("Erreur catch login :", error);
     }
   };
   
   const logout = async () => {
     try {
-      console.log('logout')
       await fetch(`${API_URL}/api/auth/logout`, { 
         method: "GET", 
         credentials: "include" 
       });
       setUser(null);
     } catch (error) {
-      console.log("Erreur catch logout :", error);
+      throw new Error("Erreur catch logout :", error);
     }
   };
     
   const checkIfAuth= async()=> {
     try{
-
-      console.log('checkIfAuth :' )
       const response = await fetch(`${API_URL}/api/auth/check`, {
         method: 'GET',
         credentials: 'include'
@@ -63,7 +59,7 @@ const AuthProvider= ({ children }) => {
       }
     }
     catch(e){
-      console.log('Erreur checkIfauth :', e)
+      throw new Error('Erreur checkIfauth :', e)
     }
   }
 

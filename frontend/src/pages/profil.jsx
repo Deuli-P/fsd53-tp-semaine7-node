@@ -77,7 +77,6 @@ const EditProfile = () => {
           newInfo.password = password
       }
 
-      console.log('send')
       const responses = await fetch(`${API_URL}/api/profile/edit`, {
         method: 'PUT',
         headers: {
@@ -88,7 +87,6 @@ const EditProfile = () => {
       })
 
       const data = await responses.json()
-      console.log('data:', data)
 
       if(data.success){
         setUser(data.user)
@@ -103,19 +101,15 @@ const EditProfile = () => {
     }
   }
 
-  useEffect(()=>{
-    console.log('userForm Category :', userForm?.category)
-  }, [userForm?.category])
-
   return (
-    <main className='edit-profile-container'>
+    <main className='page-container'>
       <h1>Editer mon profil</h1>
       <div className='divider-horizontal'/>
       {message && <ErrorMessage content={message} />}
       {userForm ?
         (
           <form 
-            className='edit-profile-form' 
+            className='page-form' 
             onSubmit={(e)=>handleSendEdit(e)}
           >
             <div className="form-label-input">
@@ -139,7 +133,7 @@ const EditProfile = () => {
                 id="category" 
                 required 
                 className='form-input'
-                value={userForm.category}
+                value={userForm?.category}
                 onChange={(e)=> handleChange(e)}
               >
               <option value="Client">Client</option>

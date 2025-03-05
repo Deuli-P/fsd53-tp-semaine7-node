@@ -49,6 +49,7 @@ export const postLogin = async (req, res) => {
             firstname: userExist.firstname,
             lastname: userExist.lastname,
             email: userExist.email,
+            category: userExist.category,
             phone: userExist.phone,
             birthdate: userExist.birthdate,
             address: userExist.address,

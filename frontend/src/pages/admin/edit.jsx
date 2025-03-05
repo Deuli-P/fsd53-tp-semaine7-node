@@ -50,7 +50,7 @@ const AdminEdit = () => {
       setUserForm(data.user)
     }
     catch(err){
-      console.log(err)
+      throw new Error('Erreur fetchdataUser edit profile :', err)
     }
   }
 
@@ -95,7 +95,6 @@ const AdminEdit = () => {
           newInfo.password = password
       }
 
-      console.log('send')
       const responses = await fetch(`${API_URL}/api/admin/edit`, {
         method: 'PUT',
         headers: {
@@ -109,7 +108,6 @@ const AdminEdit = () => {
       })
 
       const data = await responses.json()
-      console.log('data:', data)
 
       if(data.success){
         setUserForm(data.user)
@@ -120,20 +118,20 @@ const AdminEdit = () => {
       }
     }
     catch(err){
-      console.log(err)
+      throw new Error('Erreur admin edit send edit :',err)
     }
   }
 
 
   return (
-    <main className='edit-profile-container'>
+    <main className='page-container'>
       <h1>Editer le profil</h1>
       <div className='divider-horizontal'/>
       {message && <ErrorMessage content={message} />}
       {userForm ?
         (
           <form 
-            className='edit-profile-form' 
+            className='page-form' 
             onSubmit={(e)=>handleSendEdit(e)}
           >
             <div className="form-label-input">

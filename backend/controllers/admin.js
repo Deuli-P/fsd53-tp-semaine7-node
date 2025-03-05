@@ -47,7 +47,6 @@ export const adminChangeProfile = async (req, res)=> {
 
 export const deleteProfileUser = async (req, res)=> {
     try {
-        console.log('delete user')
         const { id } = req.body;
 
         await UserModel.findOneAndDelete({_id: id})
@@ -96,4 +95,65 @@ export const AmIAdmin = async (req, res)=> {
     catch (error) {
         res.status(500).json({ message: error.message });
     } 
+}
+
+export const createNewUser = async (req, res)=> {
+    try{
+        const sessionToken = req.session.token;
+
+        if(!sessionToken){
+            return res.status(401).json({ success: false, message: "Non autorisé. Veuillez vous connecter." });
+        }
+
+        const token = jwt.verify(sessionToken, process.env.JWT_SECRET);
+        if(!token){
+            return res.status(401).json({ success: false, message: "Non autorisé. Veuillez vous connecter." });
+        }
+
+        const mainUser = await UserModel.findOne({ _id: token.id });
+
+        if(!mainUser){
+            return res.status(401).json({ success: false, message: "Non autorisé. Veuillez vous connecter." });
+        }
+
+        if(!mainUser.isAdmin){
+            return res.status(403).json({ success: false, message: "Non autorisé. Veuillez vous connecter." });
+        }
+
+        const newUser = req.body;
+
+        
+        const checkIfUserExist = await UserModel.findOne({ email: newUser.email });
+
+        if(checkIfUserExist){
+            return res.status(400).json({ success: false, message: "Cet utilisateur existe déjà." });
+        }
+
+        if(!regexEmail.test(newUser.email)){
+            return res.status(400).json({ success: false, message: "Email invalide." });
+        };
+
+        if(newUser.password.length < 8 || newUser.password.length > 255){
+            return res.status(400).json({ success: false, message: "Mot de passe non valide." });
+        };
+
+        newUser.password = await bcrypt.hash(newUser.password, 10);
+
+        console.log('password done')
+        const user = new UserModel(newUser);
+
+        console.log("user creer")
+
+        await user.save()
+        .then((e)=>(
+            console.log('user saved'),
+            res.status(200).json({ success: true, message: "Utilisateur créé avec succès." })
+        ))
+        .catch((e)=>(
+            res.status(500).json({ success: false, message: "Erreur lors de la création de l'utilisateur." })
+        ))
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 }

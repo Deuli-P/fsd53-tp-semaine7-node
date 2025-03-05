@@ -24,7 +24,7 @@ const AdminMiddleware = () => {
             }
         }
         catch(e){
-            console.log('AdminMiddlewares erreur :', e)
+            throw new Error('AdminMiddlewares erreur :', e)
         }
     }
 
