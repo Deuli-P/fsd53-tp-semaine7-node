@@ -10,6 +10,7 @@ import listRouter from "./routers/list.js";
 import homeRouter from "./routers/home.js";
 import cors from "cors";
 import profileRouter from "./routers/profile.js";
+import adminRouter from "./routers/admin.js";
 
 // ==========
 // App initialization
@@ -51,6 +52,7 @@ app.use("/", homeRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/list", listRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/admin', adminRouter);
 
 
 app.listen(APP_PORT, () => {

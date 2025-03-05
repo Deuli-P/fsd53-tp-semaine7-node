@@ -369,6 +369,7 @@ button:focus, button:focus-visible{
   justify-content: center;
   align-items: center;
   gap: 1em;
+  padding-top: 30px;
   }
 
 .edit-profile-form{

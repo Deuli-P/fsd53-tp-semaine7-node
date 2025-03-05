@@ -4,41 +4,32 @@ import bcrypt from "bcrypt";
 import { regexEmail } from "../utils/utils.js";
 
 
-export const getAdminChangeProfile = async (req, res)=> {
+export const adminChangeProfile = async (req, res)=> {
     try {
 
-        const sessionToken = req.session.token;
+        console.log("adminChangeProfile");
 
-        if(!sessionToken){
-            return res.status(401).json({ success: false, message: "Non autorisé. Veuillez vous connecter." });
-        }
+        const { id, data } = req.body;
 
-        const token = jwt.verify(sessionToken, process.env.JWT_SECRET);
-        const user = await UserModel.findOne({ _id: token.id });
+        const user = await UserModel.findOne({ _id: id });
 
-        if(!user || !user.isAdmin){
-            return res.status(402).json({ success: false, message: "Non autorisé." });
-        };
-
-        const { data: newData , id } = req.body;
-
-
-        if(newData.email && !regexEmail.test(newData.email)){
+        
+        if(data.email && !regexEmail.test(data.email)){
             return res.status(400).json({ success: false, message: "Email invalide." });
         };
 
-        if(newData.password){
-            if(newData.password.length < 8 || newData.password.length > 255){
+        if(data.password){
+            if(data.password.length < 8 || data.password.length > 255){
                 return res.status(400).json({ success: false, message: "Mot de passe non valide." });
             };
 
-            newData.password = await bcrypt.hash(newData.password, 10);
+            data.password = await bcrypt.hash(data.password, 10);
         }
         else{
-            delete newData.password;
+            delete data.password;
         }
 
-        const newUser = await UserModel.findOneAndUpdate({ _id: id }, newData, {
+        const newUser = await UserModel.findOneAndUpdate({ _id: id }, data, {
             new: true
         });
 
@@ -49,6 +40,26 @@ export const getAdminChangeProfile = async (req, res)=> {
                 user: newUser
             });
         }
+
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    } 
+}
+
+export const deleteProfileUser = async (req, res)=> {
+    try {
+
+        const { id } = req.body;
+
+        const user = await UserModel.findOne({_id: id});
+
+        if(user){
+            await UserModel.findOneAndDelete({_id: id});
+            res.status(200).json({ success: true, message: "Profil supprimé avec succès." });
+        }
+
+        res.status(404).json({ success: false, message: "Profil non trouvé." });
     }
     catch (error) {
         res.status(500).json({ message: error.message });

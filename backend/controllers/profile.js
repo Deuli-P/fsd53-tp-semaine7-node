@@ -3,29 +3,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { regexEmail } from "../utils/utils.js";
 
-export const checkAdmin = async (req, res) => {
-    try {
-        const sessionToken = req.session;
 
-        const token = jwt.verify(sessionToken, process.env.JWT_SECRET);
-        const user = await UserModel.findOne({ _id: token.id });
-
-        if(!user){
-            return res.status(401).json({ success: false, message: "Non autorisé. Veuillez vous connecter." });
-        }
-
-        if (!user.isAdmin){
-            return res.status(403).json({ success: false, message: "Non autorisé. Vous n'êtes pas administrateur." });
-        }
-
-        res.status(200);
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
-export const getChangeProfile = async (req, res)=> {
+export const getChangeProfile = async (req, res) => {
     try {
 
         const sessionToken = req.session.token;
@@ -74,4 +53,29 @@ export const getChangeProfile = async (req, res)=> {
     catch (error) {
         res.status(500).json({ message: error.message });
     } 
+}
+
+export const getProfileUser = async (req,res) => {
+    try{
+        const { id } = req.params;
+
+        const user = await UserModel.findOne({ _id: id });
+
+        if(user){
+            res.status(200).json({ 
+                success: true,
+                user: user
+            });
+        }
+        else{
+            res.status(400).json({ 
+                success: false,
+                message: "Utilisateur non trouvé."
+            });
+        }
+
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 }

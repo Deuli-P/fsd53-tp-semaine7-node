@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
 import {formatDateForInput } from '../../utils/utils'
 import ErrorMessage from '../../components/ErrorMessage'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const  API_URL = import.meta.env.VITE_API_URL;
 
 const AdminEdit = () => {
 
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const [ userForm, setUserForm ] = useState();
   const [ message, setMessage ] = useState('');
@@ -32,7 +34,7 @@ const AdminEdit = () => {
 
   const fetchUserData = async() => {
     try{
-      const responses = await fetch(`${API_URL}/api/admin/${id}`, {
+      const responses = await fetch(`${API_URL}/api/profile/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -40,8 +42,11 @@ const AdminEdit = () => {
         credentials: 'include',
       })
 
+      if(responses.status === 401){
+        navigate('/')
+      }
+
       const data = await responses.json()
-      console.log('data:', data)
       setUserForm(data.user)
     }
     catch(err){
@@ -91,7 +96,7 @@ const AdminEdit = () => {
       }
 
       console.log('send')
-      const responses = await fetch(`${API_URL}/api/profile/edit`, {
+      const responses = await fetch(`${API_URL}/api/admin/edit`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -119,9 +124,6 @@ const AdminEdit = () => {
     }
   }
 
-  useEffect(()=>{
-    console.log('userForm Category :', userForm?.category)
-  }, [userForm?.category])
 
   return (
     <main className='edit-profile-container'>

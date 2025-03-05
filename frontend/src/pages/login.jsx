@@ -5,7 +5,7 @@ import ErrorMessage from '../components/ErrorMessage';
 
 const Login = () => {
 
-  const { login, checkIfAuth } = useAuth()
+  const { login, checkIfAuth, user } = useAuth()
 
   const navigate = useNavigate()
 
@@ -35,6 +35,13 @@ const Login = () => {
       navigate('/')
     }
   }
+
+
+  useEffect(() => { 
+    if(user){
+      navigate('/')
+    }
+  },[user, navigate])
 
 
   useEffect(() => {
